@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* login */
+
+.login {
+  background-image: linear-gradient(120deg, #4A0819 0%, #B93739 100%);
+  /* background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  font-family: "EB Garamond", serif;
+}
+
+.login .img-backdrop {
+  width: 500px;
+  height: 500px;
+  position: relative;
+  border-radius: 50%;
+  background-color: rgb(226, 224, 224);
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.login .img-backdrop::before,
+.login .img-backdrop::after {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: conic-gradient(transparent, transparent, transparent, rgb(253, 27, 27));
+  transform: rotate(0deg);
+  animation: rotate-border 10s linear infinite;
+}
+
+.login .img-backdrop::after {
+  animation-delay: -5s;
+  background: conic-gradient(transparent, transparent, transparent, #ffe819);
+}
+
+@keyframes rotate-border {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.login .img-backdrop .img-item {
+  position: relative;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.signIn-card {
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  background-clip: padding-box;
+  transition: box-shadow 0.3s ease-in-out;
+  background-color: rgba(235, 248, 248, 0.1);
+}
+
+.login-title {
+  color: #FCDA86;
+  /* color: #b31518; */
+
+}
+
+.title {
+  font-family: "Cormorant SC", serif;
+}
+
+.text-gray {
+  color: #e0dcdc;
+}
+
+
+/* Input field styles */
+.inputField {
+  display: block;
+  margin-bottom: 15px;
+  width: 100%;
+  padding: 6px 10px;
+  border: 2px solid rgb(204, 204, 204,.2);
+  border-radius: 5px;
+  outline: none;
+}
+
+/* Focus styles for inputs */
+.inputField:focus {
+  border-color: #667bf1;
+}
+
+/* Password toggle button */
+.password-icon {
+  border: none;
+  background: none;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%, -50%);
+  cursor: pointer;
+}
+
+/* Submit button */
+.submitButton {
+  color: white;
+  background: linear-gradient(120deg, #4A0819 0%, #B93739 100%);
+  padding: 5px 20px;
+  width: fit-content;
+  border: 1px solid white;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.link {
+  color: rgb(86, 157, 250)
+}
