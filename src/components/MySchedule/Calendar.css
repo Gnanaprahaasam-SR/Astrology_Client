@@ -1,0 +1,141 @@
+.rbc-calendar {
+    max-height: 600px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.rbc-calendar::-webkit-scrollbar {
+    display: none;
+}
+
+.range-btn {
+    padding: 5px 8px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 50%;
+    color: var(--Vastu-color);
+}
+
+.range-btn:hover,
+.range-btn:focus {
+    border-color: var(--Vastu-color);
+    background-color: var(--Vastu-color);
+    color: white;
+    box-shadow: 0 0 3px var(--Vastu-color);
+
+}
+
+
+.current-range {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: green;
+    padding: 5px;
+}
+
+.current-range:hover,
+.current-range:focus {
+    box-shadow: 0 0 3px;
+    padding: 5px;
+    border-radius: 50px;
+}
+
+.calendar-view {
+    border: 1px solid lightgray;
+    border-radius: 50px;
+    padding: 6px 8px;
+    gap: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+}
+
+.drop-down {
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+
+/* Hide the view buttons in the toolbar */
+.rbc-toolbar .rbc-btn-group {
+    display: none;
+}
+
+
+.rbc-btn-group .rbc-active {
+    background-color: var(--blue-color) !important;
+    color: white !important;
+    border-color: var(--blue-color) !important;
+    outline: none;
+}
+
+.rbc-row .rbc-header {
+    background-color: green;
+    color: white;
+    font-weight: 400;
+}
+
+.rbc-toolbar-label {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--Vastu-color);
+}
+
+.rbc-calendar {
+    background: rgba(187, 187, 187, 0.6);
+    border-radius: 10px;
+    margin-top: 10px;
+    padding-top: 10px;
+    color: white;
+}
+
+/* .rbc-day-bg {
+    border: 1px solid white;
+} */
+
+.rbc-day-bg.rbc-off-range-bg {
+    background-color: rgba(187, 187, 187, 0.6);
+    width: 100px;
+    height: 2px;
+    background: white;
+    transform: rotate(45deg);
+    margin: 40px 0;
+}
+
+.rbc-button-link {
+    color: white;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.rbc-today {
+    background-color: rgba(59, 197, 46, 0.4);
+    border: 1px solid white;
+}
+
+.jathagamClass {
+    background-color: var(--Jathagam-color) !important;
+    border-color: #ff9800 !important;
+    width: 100% !important;
+    /* min-width: 200px; */
+}
+
+.prasanamClass {
+    background-color: var(--Prasanam-color) !important;
+    border-color: var(--Prasanam-color) !important;
+}
+
+.vastuClass {
+    background-color: var(--Vastu-color) !important;
+    border-color: var(--Vastu-color) !important;
+}
+
+.homamClass {
+    background-color: var(--Homam-color) !important;
+    border-color: var(--Homam-color) !important;
+}

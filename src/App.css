@@ -1,14 +1,36 @@
-* {
+/* login */
+
+/* .login {
+  position: relative;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  overflow: hidden;
+} */
 
-/* login */
+/* #background-video {
+  display: relative;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  pointer-events: none;
+  filter: brightness(85%);
+} */
+
+/* .sign-view {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  filter: blur(15%);
+} */
+
 
 .login {
   background-image: linear-gradient(120deg, #4A0819 0%, #B93739 100%);
-  /* background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +45,7 @@
   height: 500px;
   position: relative;
   border-radius: 50%;
-  background-color: rgb(226, 224, 224);
+  background-color: whitesmoke;
   padding: 5px;
   display: flex;
   justify-content: center;
@@ -44,7 +66,7 @@
 
 .login .img-backdrop::after {
   animation-delay: -5s;
-  background: conic-gradient(transparent, transparent, transparent, #ffe819);
+  background: conic-gradient(transparent, transparent, transparent, #f1da07);
 }
 
 @keyframes rotate-border {
@@ -55,57 +77,62 @@
 
 .login .img-backdrop .img-item {
   position: relative;
-  background-color: white;
+  background-color: #000000;
   width: 100%;
   height: 100%;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8%;
   z-index: 1;
   overflow: hidden;
+  padding: 10%;
 }
+
 
 .signIn-card {
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 20px rgba(141, 140, 140, 0.8);
   background-clip: padding-box;
   transition: box-shadow 0.3s ease-in-out;
-  background-color: rgba(235, 248, 248, 0.1);
+  background-color: rgba(87, 85, 85, 0.4);
 }
 
 .login-title {
-  color: #FCDA86;
-  /* color: #b31518; */
+  color: #fca311;
+  font-family: "Marcellus SC", serif;
 
 }
 
 .title {
-  font-family: "Cormorant SC", serif;
+  font-family: "Marcellus SC", serif;
 }
 
 .text-gray {
   color: #e0dcdc;
 }
 
+.inputGroup {
+  margin-bottom: 3%;
+}
 
 /* Input field styles */
 .inputField {
   display: block;
-  margin-bottom: 15px;
   width: 100%;
   padding: 6px 10px;
-  border: 2px solid rgb(204, 204, 204,.2);
-  border-radius: 5px;
+  border: 2px solid rgb(204, 204, 204, .8);
+  border-radius: 50px;
   outline: none;
+  background-color: rgb(255, 255, 255, .6);
 }
 
 /* Focus styles for inputs */
 .inputField:focus {
-  border-color: #667bf1;
+  border-color: var(--sandle-color);
 }
+
 
 /* Password toggle button */
 .password-icon {
@@ -113,7 +140,7 @@
   background: none;
   position: absolute;
   right: 10px;
-  top: 50%;
+  top: 20%;
   transform: translateY(-50%, -50%);
   cursor: pointer;
 }
@@ -131,9 +158,473 @@
   font-weight: 500;
   text-align: center;
   margin-top: 15px;
-  width: 100%;
+
 }
 
 .link {
-  color: rgb(86, 157, 250)
+  color: rgb(86, 157, 250);
+  text-decoration: none;
+  font-size: 800 !important;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+/* service */
+
+.service {
+  color: white;
+}
+
+.service-card {
+  background: var(--info-card);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+.service-card .service-img {
+  width: 100%;
+  height: 100%;
+  /* background-color: white; */
+  text-align: center;
+  /* margin: 0 0.4rem; */
+
+}
+
+.service-btn {
+  padding: 5px 12px;
+  border: 2px solid #7c0f2b;
+  outline: none;
+  border-radius: 50px;
+  background-color: #7c0f2b;
+  /* background: linear-gradient(90deg, rgb(7, 102, 7) 50%, rgb(64, 182, 64)); */
+  color: white;
+  font-weight: 400;
+  float: right;
+  background-size: 200% 200%;
+  animation: gradientMove 4s ease-in-out infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.service-btn:hover {
+  padding: 5px 12px;
+  border: 2px solid #7c0f2b;
+  border-radius: 50px;
+  color: #7c0f2b;
+  background-color: white;
+  font-weight: 500;
+}
+
+.requirement {
+  line-clamp: 5;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.readmore {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-weight: 600;
+}
+
+/* Loader */
+
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100%;
+  z-index: 999 !important;
+  background: rgba(196, 194, 194, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden !important;
+}
+
+
+/* Booking */
+
+
+
+.fieldLabel {
+  margin-left: 10px;
+  margin-bottom: 3px;
+}
+
+.back-btn {
+  padding: 4px 8px;
+  border: none;
+  /* border: 2px solid var(--gray-color); */
+  outline: none;
+  white-space: nowrap;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.availableSlot {
+  padding: 4px 4px;
+  border: 2px solid green;
+  outline: none;
+  white-space: nowrap;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255, .6);
+}
+
+.confirmbooking {
+  padding: 4px 4px;
+  border: 2px solid green;
+  outline: none;
+  white-space: nowrap;
+  border-radius: 10px;
+  background-color: green;
+  color: white;
+}
+
+.confirmbooking:focus,
+.confirmbooking:hover {
+  padding: 4px 4px;
+  border: 2px solid green;
+  outline: none;
+  white-space: nowrap;
+  border-radius: 10px;
+  background-color: green;
+  color: white;
+}
+
+.bookedSlot {
+  padding: 4px 4px;
+  border: 2px solid rgb(235, 32, 49);
+  outline: none;
+  white-space: nowrap;
+  border-radius: 10px;
+  background-color: rgb(235, 32, 49);
+  color: white;
+}
+
+/* My Booking */
+
+.booking-card {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  grid-row: 3;
+  background: var(--info-card);
+  color: white;
+}
+
+
+/* Thumbnail Container */
+.booking-thumbnail {
+  position: relative;
+  transform: translateY(-35%);
+  z-index: 2;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background: white;
+  width: 120px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.booking-details>p {
+  font-size: 14px;
+}
+
+.thumbnail-shadow {
+  filter: drop-shadow(0 0 0.7rem yellow);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.booking-thumbnail {
+  width: 150px;
+  border: 2px solid #4A0819;
+  /* transform: translateY(-50%) scale(1.1); */
+}
+
+.thumbnail-title {
+  text-align: center;
+  position: relative;
+  transform: translateY(-130%);
+}
+
+.no-booking {
+  text-align: center;
+  padding: 5%;
+  border-radius: 8px;
+  background: var(--info-card);
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+
+/* Admin */
+
+
+
+.table-bg {
+  background: var(--info-card);
+  color: white
+}
+
+.tabHeader {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.activetab {
+  padding: 10px 15px;
+  border: none;
+  /* border-top-right-radius: 5px;
+  border-top-left-radius: 5px; */
+  cursor: pointer;
+  font-weight: 600;
+  background: rgb(128, 41, 60, .3);
+  color: white;
+  box-shadow: 0 0 10px white;
+}
+
+.inactivetab {
+  padding: 10px 15px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+}
+
+.search {
+  padding: 5px 8px;
+  width: 250px;
+  border-radius: 50px;
+  border: 1px solid white;
+  float: right;
+  margin: 5px;
+  outline: none;
+  background-color: rgba(194, 191, 191, 0.2);
+  color: white;
+}
+
+.search::placeholder {
+  color: white;
+}
+
+.search:focus {
+  border: 1px solid orange;
+}
+
+
+.responsive-table-container {
+  overflow-x: auto;
+  width: 100%;
+  min-height: 400px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.responsive-table-container::-webkit-scrollbar {
+  display: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  vertical-align: middle;
+  border: 1px solid;
+  background-color: rgba(134, 132, 132, 0.3);
+}
+
+th {
+  background: rgba(58, 57, 57, 0.3);
+  text-wrap: nowrap;
+  white-space: nowrap;
+}
+
+th,
+td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  vertical-align: middle;
+  text-wrap: wrap;
+  background: transparent !important;
+}
+
+
+.confirmed-status {
+  padding: 5px 12px;
+  border: none;
+  font-weight: 600;
+  background-color: green;
+  box-shadow: 0 0 5px 0 rgb(248, 201, 81);
+  border-radius: 8px;
+}
+
+.cancelled-status {
+  padding: 5px 12px;
+  border: none;
+  font-weight: 600;
+  color: white;
+  background-color: red;
+  box-shadow: 0 0 5px 0 rgb(248, 148, 81);
+  border-radius: 8px;
+}
+
+.pending-status {
+  padding: 5px 12px;
+  border: none;
+  font-weight: 600;
+  color: white;
+  background-color: rgb(202, 174, 12);
+  box-shadow: 0 0 5px 0 rgb(248, 148, 81);
+  border-radius: 8px;
+}
+
+.pageCount {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.nav-btn {
+  padding: 5px 6px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  color: #4A0819;
+  background-color: white;
+  cursor: pointer;
+  display: flex;
+}
+
+.confirm-btn {
+  padding: 5px;
+  display: inline-flex;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  background: transparent;
+  margin: 5px;
+}
+
+.view-btn {
+  padding: 5px;
+  display: inline-flex;
+  background: transparent;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 50px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.cancel-btn {
+  padding: 5px;
+  display: inline-flex;
+  color: white;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-radius: 50px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+
+/* modal */
+.modal {
+  z-index: 99 !important;
+  /* Set to your desired lower value */
+}
+
+.modal-backdrop {
+  z-index: 90 !important;
+  /* Backdrop should be lower than modal */
+}
+
+.modalView {
+  background: var(--info-card) !important;
+  border-radius: 16px;
+  box-shadow: 0 0 1rem rgba(248, 248, 250, 0.8);
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 2px solid rgba(255, 255, 255, 0.5) !important;
+  font-weight: 500;
+  color: white;
+  width: 100%;
+  z-index: 20 !important;
+}
+
+.modal-backdrop {
+  /* background: rgba(0, 0, 0, 0.3) !important; */
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  z-index: 19 !important;
+}
+
+.modalClose {
+  margin: 8px;
+  padding: 4px 10px;
+  background: var(--Jathagam-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.modalPrint {
+  margin: 8px;
+  padding: 4px 10px;
+  background: blue;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.modalTitle {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 600;
 }

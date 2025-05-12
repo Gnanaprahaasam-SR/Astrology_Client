@@ -1,2 +1,166 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Marcellus+SC&family=Montserrat:ital,wght@0,100..900;1,100..900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+}
+
+body {
+    background: url("../src/assets/Background.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    height: 100%;
+
+}
+
+:root {
+    --primary-red: #4A0819;
+    --secondary-red: #B93739;
+    --gray-color: rgb(226, 224, 224);
+    --sandle-color: #ffc44a;
+    --blue-color: #667bf1;
+    --orange-color: orange;
+    --pink-color: rgb(236, 45, 157);
+    --info-card: rgba(196, 106, 43, 0.6);
+    --Jathagam-color: orange;
+    --Prasanam-color: green;
+    --Vastu-color: #dc2f02;
+    --Homam-color: #acacaa;
+
+}
+
+
+
+
+/* Header */
+.header {
+    background-color: rgba(204, 168, 168, 0.8);
+}
+
+
+.header .brand,
+.header .brand:hover {
+    color: var(--secondary-red);
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+
+.header .nav-link {
+    font-weight: 500;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 50px;
+    padding: 5px 12px;
+    color: white;
+    width: fit-content;
+}
+
+.header .nav-link.active {
+    background-color: var(--info-card);
+    box-shadow: 0 0 8px 0 saddlebrown;
+    color: white !important;
+}
+
+.header .form-check-input {
+    background-color: white;
+    border: 2px solid var(--secondary-red);
+    color: var(--secondary-red)
+}
+
+.header .form-check-input:focus {
+    box-shadow: 0 0 .25rem var(--secondary-red);
+    background-color: white;
+    border: 2px solid var(--secondary-red);
+    outline: none;
+}
+
+.header .form-check-input:checked {
+    background-color: #7c0f2b;
+    border: 2px solid var(--secondary-red);
+}
+
+.header .login-btn {
+    border: none;
+    outline: none;
+    padding: 5px 12px;
+    border-radius: 50px;
+    background-color: var(--secondary-red);
+    color: white;
+    margin: 12px;
+}
+
+.language-btn {
+    border: 2px solid var(--secondary-red);
+    padding: 4px 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: block;
+    width: fit-content;
+    margin-left: 12px;
+}
+
+.dropdown {
+    border: none;
+    outline: none;
+    font-weight: 500;
+    background: transparent;
+}
+
+.dropdown .option {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.dropdown .active {
+    font-size: 13px;
+    font-weight: 400;
+    background-color: #ffc44a !important;
+    color: white;
+}
+
+
+.center-page {
+    min-height: 100vh;
+    height: 100%;
+    background: linear-gradient(120deg, #4A0819 0%, #c45153 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.god-frame {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.glow-rotate-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    z-index: 99;
+    animation: zoom-in-zoom-out 4s ease-in-out infinite;
+    border: 2px solid white;
+    display: block;
+    margin: 0 auto;
+}
+
+@keyframes zoom-in-zoom-out {
+    0% {
+        transform: scale(0.8);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+
+    100% {
+        transform: scale(0.8);
+    }
+}

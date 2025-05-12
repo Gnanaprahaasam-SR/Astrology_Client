@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useState } from "react";
 
 const useForm = (initialValue) => {
@@ -10,8 +10,15 @@ const useForm = (initialValue) => {
             [event.target.name]: event.target.value
         })
     }
-    
-    return { value, handleChange };
+    const reset = () => {
+        setValue(initialValue);
+    };
+
+    const setValues = (newValues) => {
+        setValue((prev) => ({ ...prev, ...newValues }));
+    };
+
+    return { value, handleChange, reset, setValues };
 }
 
 export default useForm;
