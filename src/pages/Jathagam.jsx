@@ -209,6 +209,7 @@ const JathagamService = () => {
                 handleTypeChange();
                 fetchAvailableSlots();
                 setValues({ cost: 500 });
+                navigate("/Services")
             }
         }
         catch (error) {
@@ -229,8 +230,10 @@ const JathagamService = () => {
     }
 
 
+
+
     return (
-        <section className="booking overflow-hide">
+        <section className="booking ">
             {loading && <Loader />}
             <div className="container col-12 col-md-9 py-4 ">
                 <div>

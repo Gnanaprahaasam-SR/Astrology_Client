@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import "../App.css";
 import homan from "../assets/homam.png";
-import jathagam from "../assets/jathagam.png";
+import jathagam from "../assets/jathagam2.png";
 import prasanam from "../assets/Prasanam2.png";
 import vastu from "../assets/vastu.png";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import document from "../assets/Homam.pdf";
 import Modal from 'react-bootstrap/Modal';
+
+import astamagalam from "../assets/astamagalam.mp3";
+import betalLeaf from "../assets/betalLeaf.mp3";
+import sozhi from "../assets/sozhi.mp3";
+import kuladeivam from "../assets/sozhi.mp3";
 
 
 const PrasanamDetails = ({ show, onHide }) => {
@@ -26,7 +31,17 @@ const PrasanamDetails = ({ show, onHide }) => {
                 <Modal.Title className="title text-center">{t("service.prasanamDetails")}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p dangerouslySetInnerHTML={{ __html: t("service.requireForPrasanam") }} />
+                <p dangerouslySetInnerHTML={{ __html: t("service.requireForBetalLeafPrasanam") }} />
+                <audio src={betalLeaf} controls />
+
+                <p dangerouslySetInnerHTML={{ __html: t("service.requireForSozhiPrasanam") }} />
+                <audio src={sozhi} controls />
+
+                <p dangerouslySetInnerHTML={{ __html: t("service.requireForKuladeivamPrasanam") }} />
+                <audio src={kuladeivam} controls />
+
+                <p dangerouslySetInnerHTML={{ __html: t("service.requireForAstamagalamPrasanam") }} />
+                <audio src={astamagalam} controls />
             </Modal.Body>
         </Modal>
     )

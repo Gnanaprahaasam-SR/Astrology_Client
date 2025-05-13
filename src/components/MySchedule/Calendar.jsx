@@ -83,7 +83,9 @@ const MyCalendar = (props) => {
                 <div >
                     <div className="button-group d-flex align-items-center gap-2 mb-2">
                         <button onClick={() => setDate(new Date())} className="current-range">{dateView(new Date().toISOString().split("T")[0])}</button>
+                        
                         <button onClick={() => setDate(prev => moment(prev).subtract(1, view).toDate())} className="range-btn"><IoIosArrowBack size={18}/></button>
+
                         <button onClick={() => setDate(prev => moment(prev).add(1, view).toDate())} className="range-btn"><IoIosArrowForward size={18} /></button>
                     </div>
                     <div className="calendar-view ">

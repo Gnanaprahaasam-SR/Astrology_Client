@@ -9,13 +9,27 @@
 }
 
 body {
-    background: url("../src/assets/Background.jpg");
+    background: linear-gradient(120deg, #4A0819 0%, #B93739 100%);
     background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
     min-height: 100vh;
     height: 100%;
+    background: radial-gradient(circle at center, #993c06 6%, #aa1e14 10%, #4A0819 40%, #8f1214 100%);
+    background-size: 200% 200%;
+    animation: radialMove 12s linear infinite;
+}
 
+@keyframes radialMove {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
 }
 
 :root {
@@ -26,12 +40,12 @@ body {
     --blue-color: #667bf1;
     --orange-color: orange;
     --pink-color: rgb(236, 45, 157);
-    --info-card: rgba(196, 106, 43, 0.6);
+    /* --info-card: rgba(196, 106, 43, 0.6); */
     --Jathagam-color: orange;
     --Prasanam-color: green;
     --Vastu-color: #dc2f02;
     --Homam-color: #acacaa;
-
+    --info-card: rgb(248, 248, 2, .2);
 }
 
 
@@ -39,13 +53,13 @@ body {
 
 /* Header */
 .header {
-    background-color: rgba(204, 168, 168, 0.8);
+    background-color: rgba(248, 246, 246, 0.1);
 }
 
 
 .header .brand,
 .header .brand:hover {
-    color: var(--secondary-red);
+    color: white;
     font-weight: 600;
     font-size: 1.5rem;
 }
@@ -59,6 +73,7 @@ body {
     padding: 5px 12px;
     color: white;
     width: fit-content;
+    white-space: nowrap;
 }
 
 .header .nav-link.active {
@@ -93,6 +108,7 @@ body {
     background-color: var(--secondary-red);
     color: white;
     margin: 12px;
+    white-space: nowrap;
 }
 
 .language-btn {
@@ -103,6 +119,7 @@ body {
     display: block;
     width: fit-content;
     margin-left: 12px;
+    white-space: nowrap;
 }
 
 .dropdown {

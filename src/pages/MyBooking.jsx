@@ -1,7 +1,7 @@
 import axios from "axios";
 import "../App.css";
 import Prasanam from "../assets/prasanam2.png";
-import Jathagam from "../assets/jathagam.png";
+import Jathagam from "../assets/jathagam2.png";
 import Vastu from "../assets/vastu.png";
 import Homam from "../assets/homam.png";
 

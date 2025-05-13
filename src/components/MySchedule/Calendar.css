@@ -38,7 +38,7 @@
 
 .current-range:hover,
 .current-range:focus {
-    box-shadow: 0 0 3px;
+    box-shadow: 0 0 4px;
     padding: 5px;
     border-radius: 50px;
 }
@@ -52,13 +52,17 @@
     align-items: center;
     justify-content: center;
     width: fit-content;
+
 }
 
 .drop-down {
     border: none;
     outline: none;
     background: transparent;
+    color: white;
 }
+
+.drop-down>option { color: black;}
 
 
 /* Hide the view buttons in the toolbar */

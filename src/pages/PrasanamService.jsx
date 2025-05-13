@@ -211,6 +211,7 @@ const PrasanamService = () => {
                 reset();
                 handleTypeChange();
                 fetchAvailableSlots();
+                navigate("/Services")
             }
         }
         catch (error) {

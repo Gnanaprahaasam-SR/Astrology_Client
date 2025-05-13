@@ -193,15 +193,7 @@ export const ConfirmBooking = ({ show, onHide, BookingDetails }) => {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <button style={{
-                        marginRight: 8,
-                        padding: "4px 10px",
-                        background: "grey",
-                        color: "#fff",
-                        border: "none",
-                        borderRadius: 4,
-                        cursor: "pointer",
-                    }} onClick={onHide} disabled={loading}>
+                    <button className="modalClose" onClick={onHide} disabled={loading}>
                         Close
                     </button>
                     <button style={{
