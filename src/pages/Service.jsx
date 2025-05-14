@@ -12,7 +12,7 @@ import Modal from 'react-bootstrap/Modal';
 import astamagalam from "../assets/astamagalam.mp3";
 import betalLeaf from "../assets/betalLeaf.mp3";
 import sozhi from "../assets/sozhi.mp3";
-import kuladeivam from "../assets/sozhi.mp3";
+import kuladeivam from "../assets/kuladeviam.mp3";
 
 
 const PrasanamDetails = ({ show, onHide }) => {
