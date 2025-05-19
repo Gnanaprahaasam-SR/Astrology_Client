@@ -11,9 +11,10 @@ import { loginStart, loginSuccess, loginFailure } from "../redux/userInfo/userIn
 import axios from "axios";
 import { Error, Success } from "../components/Alert";
 import { useTranslation } from "react-i18next";
-import ForgotPassword from "../components/Forgot";
+import Forgot from "../components/Forgot";
 
 const ApiUrl = import.meta.env.VITE_APP_SERVER;
+
 
 
 
@@ -31,7 +32,7 @@ const SignIn = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         let errors = {};
 
         // Email validation
@@ -174,7 +175,7 @@ const SignIn = () => {
                     </div>
                 </div>
             </div>
-            <ForgotPassword show={openForgot} onHide={() => setOpenForgot(false)} />
+            <Forgot show={openForgot} onHide={() => setOpenForgot(false)} />
         </div>
     );
 }

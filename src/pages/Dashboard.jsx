@@ -40,7 +40,7 @@ const Dashboard = () => {
                         acc.push({
                             start,
                             end,
-                            title: booking.name,
+                            title: booking.selectedServices,
                             service: booking.selectedServices
                         });
                     }

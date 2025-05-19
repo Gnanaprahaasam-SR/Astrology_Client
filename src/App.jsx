@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
-import { Navigate, Route, Routes, Outlet, HashRouter, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, Outlet, BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import './App.css';
@@ -21,7 +21,10 @@ const MyBooking = lazy(() => import('./pages/MyBooking'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Header = lazy(() => import("./components/Nav"));
 const Loader = lazy(() => import("./components/Loader"));
-import PageLoader from "./components/PageLoader"
+const PageLoader = lazy(() => import("./components/PageLoader"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
+const TokenExpired = lazy(() =>import ("./pages/TokenExpired"));
+
 
 const ApiUrl = import.meta.env.VITE_APP_RSP_SERVER;
 
@@ -91,13 +94,14 @@ function App() {
       <ToastContainer />
       <SuspenseWithMinDelay fallback={<PageLoader />} minDuration={5000}>
         {loading && <Loader />}
-        <HashRouter>
+        <BrowserRouter>
 
           <Routes>
             <Route path="/SignUp" element={isAuthenticated ? (userRole.profileType === "Admin" ? <Navigate to="/" /> : <Navigate to="/Services" />) : <SignUp />} />
             <Route path="/SignIn" element={isAuthenticated ? (userRole.profileType === "Admin" ? <Navigate to="/" /> : <Navigate to="/Services" />) : <SignIn />} />
-
-            <Route path="/" element={isAuthenticated === true ? <ServiceLayout /> : <Navigate to="/SignIn" />}>
+            <Route path='/ForgotPassword/:email' element={<ForgotPassword />} />
+            <Route path='/TokenExpired' element={<TokenExpired />} />
+            <Route path='/' element={isAuthenticated === true ? <ServiceLayout /> : <Navigate to="/SignIn" replace/>}>
               <Route index element={<Dashboard />} />
               <Route path='/Services' element={<Service />} />
               <Route path="/Services/Request/:category" element={<BookingService />} />
@@ -109,7 +113,7 @@ function App() {
             {/* <Route path="/loader" element={<PageLoader />} /> */}
           </Routes>
 
-        </HashRouter>
+        </BrowserRouter>
       </SuspenseWithMinDelay>
     </>
   );

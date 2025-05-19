@@ -175,7 +175,14 @@ const JathagamService = () => {
             Warring("Give valid phone number");
             return;
         }
-        if (!bookingDetails.userName || !bookingDetails.mobile || !bookingDetails.address || !bookingDetails.bookingDate || bookingDetails.time.length === 0 || !bookingDetails.count || !bookingDetails.type) {
+
+        if(bookingDetails.time.length < bookingDetails.count)
+        {
+            Warring("Please select the Time Slot based on you booking count");
+            return;
+        }
+        
+        if (!bookingDetails.userName || !bookingDetails.mobile || !bookingDetails.address || !bookingDetails.bookingDate ||  !bookingDetails.count || !bookingDetails.type) {
             Error("All mandatory fields are required");
             return;
         }
@@ -357,7 +364,7 @@ const JathagamService = () => {
 
                         <div className="d-flex flex-wrap justify-content-start row g-3">
                             {timeSlot.length > 0 ? (
-                                timeSlot.map((slot) => (
+                                timeSlot.map((slot,_) => (
                                     <div className="col-lg-3 col-md-4 col-sm-4 col-6">
                                         <button
                                             key={`${slot.startTime}-${slot.endTime}`}

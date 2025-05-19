@@ -80,30 +80,30 @@ const MyCalendar = (props) => {
     return (
         <div className="m-4">
             <div className="d-flex align-items-center justify-content-between">
-                <div >
-                    <div className="button-group d-flex align-items-center gap-2 mb-2">
-                        <button onClick={() => setDate(new Date())} className="current-range">{dateView(new Date().toISOString().split("T")[0])}</button>
-                        
-                        <button onClick={() => setDate(prev => moment(prev).subtract(1, view).toDate())} className="range-btn"><IoIosArrowBack size={18}/></button>
 
-                        <button onClick={() => setDate(prev => moment(prev).add(1, view).toDate())} className="range-btn"><IoIosArrowForward size={18} /></button>
-                    </div>
-                    <div className="calendar-view ">
-                        <label htmlFor="calendar-view" ><IoIosCalendar size={20} color="red" /></label>
-                        <select
-                            id="calendar-view"
-                            value={view}
-                            onChange={e => setView(e.target.value)}
-                            className="drop-down"
-                        >
-                            <option value="month">Month</option>
-                            <option value="week">Week</option>
-                            <option value="day">Day</option>
-                        </select>
-                    </div>
+                <div className="button-group d-flex align-items-center gap-2 mb-2">
+                    <button onClick={() => setDate(new Date())} className="current-range">{dateView(new Date().toISOString().split("T")[0])}</button>
+
+                    <button onClick={() => setDate(prev => moment(prev).subtract(1, view).toDate())} className="range-btn"><IoIosArrowBack size={18} /></button>
+
+                    <button onClick={() => setDate(prev => moment(prev).add(1, view).toDate())} className="range-btn"><IoIosArrowForward size={18} /></button>
+                </div>
+                <div className="calendar-view ">
+                    <label htmlFor="calendar-view" ><IoIosCalendar size={20} color="red" /></label>
+                    <select
+                        id="calendar-view"
+                        value={view}
+                        onChange={e => setView(e.target.value)}
+                        className="drop-down"
+                    >
+                        <option value="month">Month</option>
+                        <option value="week">Week</option>
+                        <option value="day">Day</option>
+                    </select>
                 </div>
 
-                <div className="d-block shadow-sm p-2 rounded-2 bg-white">
+
+                {/* <div className="d-block shadow-sm p-2 rounded-2 bg-white">
                     <div>
                         <GoDotFill style={{ color: "var(--Jathagam-color)" }} /> Jathagam
                     </div>
@@ -116,7 +116,7 @@ const MyCalendar = (props) => {
                     <div>
                         <GoDotFill style={{ color: "var(--Homam-color)" }} /> Homam
                     </div>
-                </div>
+                </div> */}
             </div>
             <Calendar
                 localizer={localizer}

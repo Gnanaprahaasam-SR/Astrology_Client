@@ -48,6 +48,7 @@ const InputField = (
                 onChange={handleInputChange}
                 pattern={pattern?.toString()}
                 maxLength={maxLength + 1}
+                
                 {...props}
             />
             {localError && <span className="d-block text-warning ps-2">{localError}</span>

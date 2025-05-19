@@ -76,6 +76,10 @@ body {
     white-space: nowrap;
 }
 
+.header .nav-link:hover{
+    color: var(--Jathagam-color);
+}
+
 .header .nav-link.active {
     background-color: var(--info-card);
     box-shadow: 0 0 8px 0 saddlebrown;
@@ -127,18 +131,20 @@ body {
     outline: none;
     font-weight: 500;
     background: transparent;
+    color: white;
 }
 
 .dropdown .option {
     font-size: 13px;
     font-weight: 400;
+    color: black;
 }
 
 .dropdown .active {
     font-size: 13px;
     font-weight: 400;
     background-color: #ffc44a !important;
-    color: white;
+    
 }
 
 

@@ -29,11 +29,13 @@
 
 
 .current-range {
-    border: none;
+    border: 1px solid rgb(103, 170, 3);
+    border-radius: 50px;
     outline: none;
-    background: transparent;
-    color: green;
+    background: rgb(103, 170, 3);
+    color: white;
     padding: 5px;
+
 }
 
 .current-range:hover,
@@ -62,7 +64,9 @@
     color: white;
 }
 
-.drop-down>option { color: black;}
+.drop-down>option {
+    color: black;
+}
 
 
 /* Hide the view buttons in the toolbar */
