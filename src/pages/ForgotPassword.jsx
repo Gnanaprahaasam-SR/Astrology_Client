@@ -70,7 +70,7 @@ const ForgotPassword = () => {
                 if (response.status === 200) {
                     reset();
                     Success("Password updated successfully!");
-                    navigate(ClientUrl, { replace: true });
+                    navigate("/SignIn", { replace: true });
                 }
 
             } catch (error) {
