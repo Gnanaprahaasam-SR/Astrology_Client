@@ -216,7 +216,7 @@ const JathagamService = () => {
                 handleTypeChange();
                 fetchAvailableSlots();
                 setValues({ cost: 500 });
-                navigate("/Services")
+                navigate("/Services", { replace: true })
             }
         }
         catch (error) {

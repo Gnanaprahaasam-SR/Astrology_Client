@@ -126,7 +126,7 @@ const BookingService = () => {
                 Success('Booking Successfull')
                 reset();
                 handleTypeChange();
-                navigate("/Services")
+                navigate("/Services", { replace: true })
             }
 
         }

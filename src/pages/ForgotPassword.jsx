@@ -10,7 +10,7 @@ import { Error, Success } from "../components/Alert";
 
 
 const ApiUrl = import.meta.env.VITE_APP_SERVER;
-
+const ClientUrl = import.meta.env.VITE_APP_CLIENT;
 
 
 const ForgotPassword = () => {
@@ -70,7 +70,7 @@ const ForgotPassword = () => {
                 if (response.status === 200) {
                     reset();
                     Success("Password updated successfully!");
-                    navigate("/")
+                    navigate(ClientUrl, { replace: true });
                 }
 
             } catch (error) {
@@ -82,6 +82,8 @@ const ForgotPassword = () => {
                     Error("Server not founded!");
                 }
                 console.error("Error occurred in API call:", error);
+
+            } finally {
                 setLoading(false);
             }
         }

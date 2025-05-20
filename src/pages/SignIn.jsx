@@ -76,9 +76,9 @@ const SignIn = () => {
                     reset();
                     Success("Login Successfully!");
                     if (userType.profileType === "Customer") {
-                        navigate("/Services")
+                        navigate("/Services", { replace: true })
                     } else {
-                        navigate("/")
+                        navigate("/", { replace: true })
                         i18n.changeLanguage('en');
                     }
                 }
