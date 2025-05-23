@@ -58,6 +58,7 @@ const JathagamService = () => {
     const PrasanamOptions = [
         { value: 'analyzeHoroscope', label: t("service.analyze_horoscope") },
         { value: 'writeHoroscope', label: t('service.write_horoscope') },
+        { value: 'horoscopeMatching', label: t("service.horoscope_Matching") },
     ]
 
 
@@ -71,8 +72,20 @@ const JathagamService = () => {
         bookingDate: new Date().toISOString().split("T")[0],
         time: [],
         cost: '',
+        document: []
     });
     // console.log(bookingDetails)
+
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = () => resolve("");
+        });
+    }
+
+    const [imagePreviews, setImagePreviews] = useState([]);
 
     const [loading, setLoading] = useState(false);
     const [timeSlot, setTimeSlot] = useState([]);
@@ -165,24 +178,28 @@ const JathagamService = () => {
         } else if (bookingDetails.type === "writeHoroscope") {
             newCost = 2000;
         }
+        else if (bookingDetails.type === "horoscopeMatching") {
+            newCost = 200;
+        }
         setValues({ cost: newCost * bookingDetails.count });
     }, [bookingDetails.count, bookingDetails.type]);
 
 
     const handleBooking = async () => {
 
+        console.log(bookingDetails)
+
         if (bookingDetails.mobile.length < 10) {
             Warring("Give valid phone number");
             return;
         }
 
-        if(bookingDetails.time.length < bookingDetails.count)
-        {
+        if (bookingDetails.type !== "horoscopeMatching" && bookingDetails.time.length < bookingDetails.count) {
             Warring("Please select the Time Slot based on you booking count");
             return;
         }
-        
-        if (!bookingDetails.userName || !bookingDetails.mobile || !bookingDetails.address || !bookingDetails.bookingDate ||  !bookingDetails.count || !bookingDetails.type) {
+
+        if (!bookingDetails.userName || !bookingDetails.mobile || !bookingDetails.address || !bookingDetails.bookingDate || !bookingDetails.count || !bookingDetails.type) {
             Error("All mandatory fields are required");
             return;
         }
@@ -200,8 +217,9 @@ const JathagamService = () => {
                 timeSlots: bookingDetails.time,
                 serviceType: bookingDetails.type,
                 mapLink: "",
-                bookingStatus: "Confirmed",
+                bookingStatus: bookingDetails.type === "horoscopeMatching" ? "Pending" : "Confirmed",
                 cost: bookingDetails.cost,
+                document: bookingDetails.document,
             }, {
                 headers: {
                     "Content-Type": "application/json",
@@ -237,7 +255,38 @@ const JathagamService = () => {
     }
 
 
+    const handleImageChange = async (e) => {
+        const newFiles = Array.from(e.target.files);
 
+        const validFiles = newFiles.filter(file => {
+            if (file.size <= 1040000) return true;
+            Warring(`${file.name} exceeds the 500KB size limit and was not added.`);
+            return false;
+        });
+
+        // Convert to base64 strings
+        const newBase64Images = await Promise.all(
+            validFiles.map(file => fileToBase64(file))
+        );
+
+        // Combine with existing images
+        const allImages = [...bookingDetails.document, ...newBase64Images];
+
+        // Optional: remove duplicates
+        const uniqueImages = Array.from(new Set(allImages));
+
+        // Optional: sort alphabetically by base64
+        uniqueImages.sort((a, b) => a.localeCompare(b));
+
+        setValues({ ...bookingDetails, document: uniqueImages });
+        setImagePreviews(uniqueImages); // same as images
+    };
+
+    const handleDeleteImage = (index) => {
+        const updatedImages = bookingDetails.document.filter((_, i) => i !== index);
+        setValues({ ...bookingDetails, document: updatedImages });
+        setImagePreviews(updatedImages);
+    };
 
     return (
         <section className="booking ">
@@ -327,6 +376,7 @@ const JathagamService = () => {
                             value={bookingDetails.cost}
                             onChange={handleChange}
                             className="inputField"
+                            maxLength={6}
                             required
                             group="inputGroup"
                             disabled
@@ -358,34 +408,62 @@ const JathagamService = () => {
                             rows={3}
                         />
                     </div>
-
-                    <div className="col-12 ">
-                        <label htmlFor="time" className="fieldLabel mb-2">{t("service.timeslots")}<span className=''>*</span></label>
-
-                        <div className="d-flex flex-wrap justify-content-start row g-3">
-                            {timeSlot.length > 0 ? (
-                                timeSlot.map((slot,_) => (
-                                    <div className="col-lg-3 col-md-4 col-sm-4 col-6">
-                                        <button
-                                            key={`${slot.startTime}-${slot.endTime}`}
-                                            type="button"
-                                            className={`w-100 ${slot.available ? 'availableSlot' : 'bookedSlot'}
-                                         ${bookingDetails.time.some((time) =>
-                                                time.startTime === slot.startTime && time.endTime === slot.endTime) ? 'confirmbooking' : ''
-                                                }`}
-                                            onClick={() => slot.available && handleTimeSelect(slot)}
-                                            disabled={!slot.available}
-                                        >
-                                            {`${slot.startTime} - ${slot.endTime}`}
-                                        </button>
-                                    </div>
-
-                                ))
-                            ) : (
-                                <p>{t("service.no-timeSlot")}</p>
+                    {bookingDetails.type === "horoscopeMatching" ?
+                        <>
+                            <div className="col-12 col-sm-6 col-md-4 mb-3">
+                                <label htmlFor="document" className="fieldLabel">{t("service.horoscopeDocument")}</label>
+                                <input type="file" name="document" accept="image/*" multiple className="inputField" onChange={handleImageChange} />
+                            </div>
+                            {imagePreviews.length > 0 && (
+                                <div className="imagePreview" >
+                                    {imagePreviews.map((src, idx) => (
+                                        <div key={idx} style={{ position: "relative" }}>
+                                            <img
+                                                src={src}
+                                                alt={`Preview ${idx + 1}`}
+                                                style={{ maxWidth: "120px", maxHeight: "120px", marginBottom: "15px" }}
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => handleDeleteImage(idx)}
+                                                className="image-cancel"
+                                            >
+                                                ×
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
                             )}
+
+                        </> :
+                        <div className="col-12 ">
+                            <label htmlFor="time" className="fieldLabel mb-2">{t("service.timeslots")}<span className=''>*</span></label>
+
+                            <div className="d-flex flex-wrap justify-content-start row g-3">
+                                {timeSlot.length > 0 ? (
+                                    timeSlot.map((slot, index) => (
+                                        <div className="col-lg-3 col-md-4 col-sm-4 col" key={index}>
+                                            <button
+                                                key={`${slot.startTime}-${slot.endTime}`}
+                                                type="button"
+                                                className={`w-100 ${slot.available ? 'availableSlot' : 'bookedSlot'}
+                                         ${bookingDetails.time.some((time) =>
+                                                    time.startTime === slot.startTime && time.endTime === slot.endTime) ? 'confirmbooking' : ''
+                                                    }`}
+                                                onClick={() => slot.available && handleTimeSelect(slot)}
+                                                disabled={!slot.available}
+                                            >
+                                                {`${slot.startTime} - ${slot.endTime}`}
+                                            </button>
+                                        </div>
+
+                                    ))
+                                ) : (
+                                    <p>{t("service.no-timeSlot")}</p>
+                                )}
+                            </div>
                         </div>
-                    </div>
+                    }
                     <div className="text-center">
                         <button className="submitButton " onClick={handleBooking}> {t("service.submit")}</button>
                     </div>

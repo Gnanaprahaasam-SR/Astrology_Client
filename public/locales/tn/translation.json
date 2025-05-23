@@ -7,7 +7,8 @@
         "history": "என் முன்பதிவுகள்",
         "home": "முகப்பு",
         "mybooking": "என் முன்பதிவுகள்",
-        "logout": "வெளியேறு"
+        "logout": "வெளியேறு",
+        "slotControl":"அட்டவணை கட்டுப்பாடு"
     },
     "service": {
         "bookNow": "பதிவு செய்யவும்",
@@ -54,6 +55,9 @@
         "serviceCost": "சேவை தொகை (ரூ.)",
         "analyze_horoscope": "ஜாதகம் பார்க்க",
         "write_horoscope": "ஜாதகம் எழுத",
+        "horoscope_Matching":"ஜாதகப் பொருத்தம்",
+        "horoscopeDocument":"ஜாதக நகலைச் சேர்க்கவும்",
+        "horoscopecopy": "ஜாதக நகல்",
         "bookingPersonName": "முன்பதிவு நபர் பெயர்",
         "phone": "தொலைபேசி",
         "service": "சேவை",

@@ -1,5 +1,5 @@
 
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { Modal } from "react-bootstrap";
 import { formateDate } from "../utilities/DateFormat";
 import { useTranslation } from "react-i18next";
@@ -37,6 +37,7 @@ const BookingDetails = ({ bookingData, show, onHide }) => {
     const serviceMap = {
         analyzeHoroscope: t("service.analyze_horoscope"),
         writeHoroscope: t("service.write_horoscope"),
+        horoscopeMatching: t("service.horoscope_Matching"),
         vethalaiPrasanam: t("service.vethalaiPrasanam"),
         sooliPrasanam: t("service.sooliPrasanam"),
         kulatheivaPrasanam: t("service.kulatheivaPrasanam"),
@@ -68,7 +69,6 @@ const BookingDetails = ({ bookingData, show, onHide }) => {
                 <Modal.Title className="title modalTitle">{t("service.bookingDetails")}</Modal.Title>
 
                 <Modal.Body>
-
                     <table className="">
                         <tbody>
                             {bookingData?.bookingId && (
@@ -153,6 +153,26 @@ const BookingDetails = ({ bookingData, show, onHide }) => {
                                     </td>
                                 </tr>
                             )}
+                            {bookingData?.document?.length > 0 &&
+                                <tr>
+                                    <th>{t("service.horoscopecopy")}</th>
+                                    <td>
+                                        {bookingData?.document.map((data, index) => (
+                                            <React.Fragment key={index}>
+                                                <a
+                                                    href={data}
+                                                    download={`Document-${index + 1}.jpg`}
+                                                    rel="noopener noreferrer"
+                                                    className="text-white"
+                                                >
+                                                    Download Document
+                                                </a>
+                                                <br />
+                                            </React.Fragment>
+                                        ))}
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
 
@@ -170,7 +190,6 @@ const BookingDetails = ({ bookingData, show, onHide }) => {
                     {t("service.print")}
                 </button>
             </div>
-
 
         </Modal>
     );

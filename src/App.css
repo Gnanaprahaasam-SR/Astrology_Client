@@ -189,6 +189,11 @@
   flex-wrap: wrap;
 }
 
+@media screen and (min-width:330px) and (max-width:530px) {
+  .service img {
+    padding: 10%;
+  }
+}
 
 
 
@@ -253,6 +258,23 @@
   outline: none;
   color: white;
   font-weight: 600;
+}
+
+.imagePreview {
+  display: flex;
+  gap: 15px;
+  position: relative;
+}
+
+.image-cancel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  border: none;
+  padding: 0px 6px;
+  border-radius: 50px;
+  color: white;
 }
 
 /* Loader */
@@ -429,6 +451,8 @@
   font-weight: 600;
   border-bottom: 1px solid #eee;
 }
+
+
 
 .search {
   padding: 5px 8px;
@@ -627,4 +651,18 @@ td {
   text-align: center;
   font-size: 25px;
   font-weight: 600;
+}
+
+
+.slotButton {
+  padding: 5px 8px;
+  width: min(fit-content, 250px);
+  border-radius: 50px;
+  border: 1px solid green;
+  float: right;
+  margin: 5px;
+  outline: none;
+  background-color: green;
+  color: white;
+  box-shadow: 0 0 .2rem white;
 }

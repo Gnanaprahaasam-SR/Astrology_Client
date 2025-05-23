@@ -11,6 +11,7 @@ import { logout } from './redux/userInfo/userInfo';
 import Admin from './pages/Admin';
 import axios from 'axios';
 import JathagamService from './pages/Jathagam';
+import ControlSlot from './pages/ControlSlot';
 
 const SignIn = lazy(() => import('./pages/SignIn'));
 const SignUp = lazy(() => import('./pages/SignUp'));
@@ -23,7 +24,7 @@ const Header = lazy(() => import("./components/Nav"));
 const Loader = lazy(() => import("./components/Loader"));
 const PageLoader = lazy(() => import("./components/PageLoader"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
-const TokenExpired = lazy(() =>import ("./pages/TokenExpired"));
+const TokenExpired = lazy(() => import("./pages/TokenExpired"));
 
 
 const ApiUrl = import.meta.env.VITE_APP_RSP_SERVER;
@@ -101,7 +102,7 @@ function App() {
             <Route path="/SignIn" element={isAuthenticated ? (userRole.profileType === "Admin" ? <Navigate to="/" /> : <Navigate to="/Services" />) : <SignIn />} />
             <Route path='/ForgotPassword/:email' element={<ForgotPassword />} />
             <Route path='/TokenExpired' element={<TokenExpired />} />
-            <Route path='/' element={isAuthenticated === true ? <ServiceLayout /> : <Navigate to="/SignIn" replace/>}>
+            <Route path='/' element={isAuthenticated === true ? <ServiceLayout /> : <Navigate to="/SignIn" replace />}>
               <Route index element={<Dashboard />} />
               <Route path='/Services' element={<Service />} />
               <Route path="/Services/Request/:category" element={<BookingService />} />
@@ -109,10 +110,11 @@ function App() {
               <Route path="/Services/Jathagam" element={<JathagamService />} />
               <Route path='/MyBooking' element={<MyBooking />} />
               <Route path='/Admin' element={<Admin />} />
+              <Route path="/SlotControl" element={<ControlSlot />} />
             </Route>
             {/* <Route path="/loader" element={<PageLoader />} /> */}
-          </Routes>
 
+          </Routes>
         </BrowserRouter>
       </SuspenseWithMinDelay>
     </>

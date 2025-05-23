@@ -1,17 +1,22 @@
 import { useEffect, useMemo, useState } from "react";
 import Loader from "../components/Loader";
 import axios from "axios";
-import { Error } from "../components/Alert";
-import { CancelBooking, ConfirmBooking, RequirementUpdate, ViewBooking } from "../components/UpdateBookingStatus";
+import { Error, Warring } from "../components/Alert";
+import { CancelBooking, ConfirmBooking, JathagamMatching, RequirementUpdate, } from "../components/UpdateBookingStatus";
 
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { ImCancelCircle } from "react-icons/im";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { FaCheck } from "react-icons/fa";
 import { TfiWrite } from "react-icons/tfi";
+import { useTranslation } from "react-i18next";
+import BookingDetails from "../components/BookingDetailsModal";
+import { useDispatch } from "react-redux";
 
 const SERVICES = ["Jathagam", "Prasanam", "Vastu", "Homam"];
 const ApiUrl = import.meta.env.VITE_APP_SERVER;
+
+
 
 const Admin = () => {
     const [activeTab, setActiveTab] = useState(SERVICES[0]);
@@ -20,14 +25,39 @@ const Admin = () => {
     const [viewBooking, setViewBooking] = useState(false);
     const [cancelBooking, setCancelBooking] = useState(false);
     const [confirmBooking, setConfirmBooking] = useState(false);
+    const [jathagamMatching, setJathagamMatching] = useState(false);
     const [bookingDetail, setBookingDetail] = useState({});
     const [updateRequirement, setUpdateRequirement] = useState(false);
+    const [pendingMatch, setPendingMatch] = useState({});
 
     // Pagination state
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
 
+    const { t } = useTranslation();
+
+    const dispatch = useDispatch();
+
+    const serviceMap = {
+        analyzeHoroscope: t("service.analyze_horoscope"),
+        writeHoroscope: t("service.write_horoscope"),
+        horoscopeMatching: t("service.horoscope_Matching"),
+        vethalaiPrasanam: t("service.vethalaiPrasanam"),
+        sooliPrasanam: t("service.sooliPrasanam"),
+        kulatheivaPrasanam: t("service.kulatheivaPrasanam"),
+        astamangalaPrasanam: t("service.astamangalaPrasanam"),
+        ganapathyHomam: t("service.ganapathy_homam"),
+        kirahaPrethesam: t("service.kiraha_prethesam"),
+        marriage: t("service.marriage"),
+        kumbaAbishegam: t("service.kumba_abishegam"),
+        sudarshanaHomam: t("service.sudarshana_homam"),
+        mahalakshmiHomam: t("service.mahalakshmi_homam"),
+        chandiHomam: t("service.chandi_homam"),
+        navaGrahamHomam: t("service.nava_graham_homam"),
+        pariharaHomam: t("service.parihara_homam"),
+        ayushHomam: t("service.ayush_homam"),
+    };
 
     const fetchBooking = async () => {
         setLoading(true);
@@ -41,7 +71,12 @@ const Admin = () => {
                 const sortedData = response.data.sort(
                     (a, b) => new Date(b.date) - new Date(a.date)
                 );
-                setBookings(sortedData)
+                setBookings(sortedData);
+
+                const pendingMathching = response?.data.filter(data => { return data.serviceType === "horoscopeMatching" && data.bookingStatus === "Pending" })
+                pendingMathching.forEach((data) => {
+                    Warring(`Horoscope Matching is Pending. BookingId (${data.bookingId})`);
+                });
             }
         } catch (error) {
             // console.log(error.message || 'Failed to fetch bookings');
@@ -61,11 +96,14 @@ const Admin = () => {
         } finally {
             setLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
         fetchBooking();
     }, []);
+
+
+
 
     // Filter bookings for current tab/service
     const ServiceFilter = useMemo(() =>
@@ -120,6 +158,7 @@ const Admin = () => {
         setCancelBooking(false);
         setConfirmBooking(false);
         setViewBooking(false);
+        setJathagamMatching(false);
         setBookingDetail({});
         setUpdateRequirement(false);
         fetchBooking();
@@ -182,7 +221,7 @@ const Admin = () => {
                                         {/* <td>{booking.userId}</td> */}
                                         <td>{booking.name || booking.userName}</td>
                                         <td>{booking.phone}</td>
-                                        <td style={{ whiteSpace: "nowrap" }}>{booking.serviceType ?? "-"}</td>
+                                        <td style={{ whiteSpace: "nowrap" }}>{serviceMap[booking.serviceType] || "-"}</td>
                                         <td className="text-center" style={{ whiteSpace: "nowrap" }}>{booking.count ?? "-"}</td>
                                         <td style={{ whiteSpace: "nowrap" }}>{booking.date}</td>
                                         <td style={{ whiteSpace: "nowrap" }}>
@@ -224,19 +263,40 @@ const Admin = () => {
                                                     <ImCancelCircle size={18} />
                                                 </button>
                                             }
-                                            {booking.bookingStatus === "Pending" ?
-                                                < button
-                                                    className="confirm-btn"
-                                                    onClick={() => { setConfirmBooking(true); setBookingDetail(booking); }}
-                                                >
-                                                    <FaCheck size={18} />
-                                                </button> :
+
+                                            {booking.serviceType === "horoscopeMatching" ? <>
+                                                {booking.bookingStatus === "Pending" &&
+                                                    < button
+                                                        className="confirm-btn"
+                                                        onClick={() => { setJathagamMatching(true); setBookingDetail(booking); }}
+                                                    >
+                                                        <FaCheck size={18} />
+                                                    </button>}
                                                 < button
                                                     className="view-btn"
                                                     onClick={() => { setViewBooking(true); setBookingDetail(booking); }}
                                                 >
                                                     <MdOutlineRemoveRedEye size={20} />
                                                 </button>
+                                            </> :
+                                                <>
+                                                    {booking.bookingStatus === "Pending" ?
+                                                        < button
+                                                            className="confirm-btn"
+                                                            onClick={() => { setConfirmBooking(true); setBookingDetail(booking); }}
+                                                        >
+                                                            <FaCheck size={18} />
+                                                        </button> :
+                                                        < button
+                                                            className="view-btn"
+                                                            onClick={() => { setViewBooking(true); setBookingDetail(booking); }}
+                                                        >
+                                                            <MdOutlineRemoveRedEye size={20} />
+                                                        </button>
+
+                                                    }
+                                                </>
+
                                             }
                                             {activeTab === "Homam" && booking.productList.length <= 0 &&
                                                 <button className="view-btn" onClick={() => { setUpdateRequirement(true), setBookingDetail(booking); }}>
@@ -305,7 +365,9 @@ const Admin = () => {
             <RequirementUpdate onHide={handleAction} show={updateRequirement} BookingDetails={bookingDetail} />
             <ConfirmBooking onHide={handleAction} show={confirmBooking} BookingDetails={bookingDetail} />
             <CancelBooking onHide={handleAction} show={cancelBooking} BookingDetails={bookingDetail} />
-            <ViewBooking onHide={handleAction} show={viewBooking} BookingDetails={bookingDetail} />
+            <BookingDetails onHide={handleAction} show={viewBooking} bookingData={bookingDetail} />
+
+            <JathagamMatching onHide={handleAction} show={jathagamMatching} BookingDetails={bookingDetail} />
         </div >
     );
 }

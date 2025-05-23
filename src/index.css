@@ -64,6 +64,24 @@ body {
     font-size: 1.5rem;
 }
 
+@media screen and (min-width:320px) and (max-width:430px) {
+    .header .brand,
+    .header .brand:hover {
+        color: white;
+        font-weight: 600;
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-width:430px) and (max-width:530px) {
+    .header .brand,
+    .header .brand:hover {
+        color: white;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+}
+
 
 .header .nav-link {
     font-weight: 500;
@@ -76,7 +94,7 @@ body {
     white-space: nowrap;
 }
 
-.header .nav-link:hover{
+.header .nav-link:hover {
     color: var(--Jathagam-color);
 }
 
@@ -144,7 +162,7 @@ body {
     font-size: 13px;
     font-weight: 400;
     background-color: #ffc44a !important;
-    
+
 }
 
 

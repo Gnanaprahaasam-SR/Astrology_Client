@@ -95,6 +95,15 @@ const Header = () => {
               {t('nav.mybooking')}
             </Nav.Link>
 
+            <Nav.Link
+              as={NavLink}
+              to="/SlotControl"
+              onClick={() => setAction(false)}
+              className={profileType === "Customer" && " d-none"}
+            >
+              {t("nav.slotControl")}
+            </Nav.Link>
+
           </Nav>
           <Nav className="d-flex flex-row align-items-center">
             <div className={profileType === "Customer" ? "language-btn" : "d-none"}>

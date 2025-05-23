@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import { Error, Success } from "./Alert";
 import axios from "axios";
@@ -289,93 +289,162 @@ export const CancelBooking = ({ show, onHide, BookingDetails }) => {
     );
 }
 
-export const ViewBooking = ({ show, onHide, BookingDetails }) => {
+export const JathagamMatching = ({ show, onHide, BookingDetails }) => {
+    const dispatch = useDispatch();
 
+    const [loading, setLoading] = useState(false);
+
+    const handleConfirm = async () => {
+
+        try {
+            setLoading(true)
+            const response = await axios.put(`${ApiUrl}/api/updatebookingStatus`, {
+                id: BookingDetails.bookingId,
+                timeSlots: [],
+                bookingStatus: "Confirmed",
+            }, {
+                headers: { "Content-Type": "application/json" },
+                withCredentials: true,
+            });
+            // console.log(response)
+            if (response.status === 200) {
+                Success('Booking status updated successfully');
+                onHide();
+            }
+        } catch (error) {
+            console.log(error.message || 'Failed to update bookings');
+            const status = error.response?.status;
+            if (status === 429) {
+                Error('Too many Requests, Try for some other time')
+            } else if (status === 404) {
+                Error('Invalid BookingId !')
+            } else if (status === 400) {
+                Error('TimeSlot is already Booked')
+            }
+            else if (status === 401) {
+                Error('Session timed out')
+                setTimeout(() => {
+                    dispatch(logout());
+                }, 200);
+            } else {
+                Error('Something went wrong')
+            }
+        } finally {
+            setLoading(false);
+        }
+
+    };
 
     return (
-        <Modal
-            show={show}
-            onHide={onHide}
-            backdrop="static"
-            centered
-            keyboard={false}
-            contentClassName="modalView"
-        >
+        <>
+            {loading && < Loader />}
+            <Modal
+                show={show}
+                onHide={onHide}
+                backdrop="static"
+                centered
+                keyboard={false}
+                contentClassName="modalView"
 
-            <Modal.Title className="title modalTitle">{BookingDetails.selectedServices} Services</Modal.Title>
+            >
 
-            <Modal.Body>
-                <table >
-                    <tbody>
-                        <tr>
-                            <th align="left">User Name</th>
-                            <td>{BookingDetails.name || "-"}</td>
-                        </tr>
-                        <tr>
-                            <th align="left">Phone</th>
-                            <td>{BookingDetails.phone || "-"}</td>
-                        </tr>
-                        <tr>
-                            <th align="left">Address</th>
-                            <td>{BookingDetails.address || "-"}</td>
-                        </tr>
-                        <tr>
-                            <th align="left">Service Type</th>
-                            <td>{BookingDetails.serviceType || "-"}</td>
-                        </tr>
-                        <tr>
-                            <th align="left">Count</th>
-                            <td>{BookingDetails.count ?? "-"}</td>
-                        </tr>
-                        <tr>
-                            <th align="left">Date</th>
-                            <td>{BookingDetails.date || "-"}</td>
-                        </tr>
-                        <tr>
-                            <th align="left">Booking Status</th>
-                            <td>{BookingDetails.bookingStatus || "-"}</td>
-                        </tr>
-                        <tr>
-                            <th align="left">Booking ID</th>
-                            <td>{BookingDetails.bookingId || "-"}</td>
-                        </tr>
-                        {BookingDetails.mapLink && (
+                <Modal.Title className="title modalTitle">
+                    Jathagama Matching
+                </Modal.Title>
+
+                <Modal.Body>
+                    <table >
+                        <tbody style={{ maxHeight: '400px', overflowY: 'auto', width: '100%' }}>
                             <tr>
-                                <th align="left">Map Link</th>
-                                <td>
-                                    <a
-                                        href={BookingDetails.mapLink}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-white"
-                                    >
-                                        View Map
-                                    </a>
-                                </td>
+                                <th>User Name</th>
+                                <td>{BookingDetails.name || "-"}</td>
                             </tr>
-                        )}
-                        <tr>
-                            <th align="left">Timing</th>
-                            <td>
-                                {BookingDetails.timeSlots && BookingDetails.timeSlots.length > 0
-                                    ? BookingDetails.timeSlots.map((slot, i) => (
-                                        <div key={i}>
-                                            {slot.startTime} - {slot.endTime}
-                                        </div>
-                                    ))
-                                    : "-"}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                            <tr>
+                                <th>Phone</th>
+                                <td>{BookingDetails.phone || "-"}</td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <td>{BookingDetails.address || "-"}</td>
+                            </tr>
+                            <tr>
+                                <th>Service Type</th>
+                                <td>{BookingDetails.serviceType || "-"}</td>
+                            </tr>
+                            <tr>
+                                <th>Count</th>
+                                <td>{BookingDetails.count ?? "-"}</td>
+                            </tr>
+                            <tr>
+                                <th>Date</th>
+                                <td>{BookingDetails.date || "-"}</td>
+                            </tr>
+                            <tr>
+                                <th>Booking Status</th>
+                                <td>{BookingDetails.bookingStatus || "-"}</td>
+                            </tr>
+                            <tr>
+                                <th>Booking ID</th>
+                                <td>{BookingDetails.bookingId || "-"}</td>
+                            </tr>
+                            {BookingDetails.mapLink && (
+                                <tr>
+                                    <th>Map Link</th>
+                                    <td>
+                                        <a
+                                            href={BookingDetails.mapLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-white"
+                                        >
+                                            View Map
+                                        </a>
+                                    </td>
+                                </tr>
+                            )}
 
-            </Modal.Body>
-            <div className="d-flex justify-content-center">
-                <button className="modalClose " onClick={onHide}>
-                    Close
-                </button>
-            </div>
-        </Modal >
+                            {BookingDetails?.document?.length > 0 &&
+                                <tr>
+                                    <th>Horoscope Copy</th>
+                                    <td>
+                                        {BookingDetails?.document.map((data, index) => (
+                                            <React.Fragment key={index}>
+                                                <a
+                                                    href={data}
+                                                    download={`Document-${index + 1}.jpg`}
+                                                    rel="noopener noreferrer"
+                                                    className="text-white"
+                                                >
+                                                    Download Document
+                                                </a>
+                                                <br />
+                                            </React.Fragment>
+                                        ))}
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <button className="modalClose" onClick={onHide} disabled={loading}>
+                        Close
+                    </button>
+                    <button style={{
+                        padding: "4px 10px",
+                        background: "#28a745",
+                        color: "#fff",
+                        border: "none",
+                        borderRadius: 4,
+                        cursor: "pointer",
+                    }} onClick={handleConfirm} disabled={loading}>
+                        Confirm Booking
+                    </button>
+                </Modal.Footer>
+            </Modal>
+        </>
     );
 };
 

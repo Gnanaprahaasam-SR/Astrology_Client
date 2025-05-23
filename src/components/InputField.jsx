@@ -47,8 +47,8 @@ const InputField = (
                 placeholder={placeholder}
                 onChange={handleInputChange}
                 pattern={pattern?.toString()}
-                maxLength={maxLength + 1}
-                
+                maxLength={Number(maxLength) + 1}
+
                 {...props}
             />
             {localError && <span className="d-block text-warning ps-2">{localError}</span>

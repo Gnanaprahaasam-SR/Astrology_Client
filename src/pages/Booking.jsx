@@ -6,11 +6,12 @@ import Select from 'react-select';
 import { IoCaretBack } from "react-icons/io5";
 import axios from "axios";
 const ApiUrl = import.meta.env.VITE_APP_SERVER;
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Error, Success, Warring } from "../components/Alert";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import Loader from "../components/Loader";
+import { logout } from "../redux/userInfo/userInfo";
 
 
 
@@ -54,7 +55,8 @@ const BookingService = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const userDetails = useSelector((state) => state.user?.user)
+    const userDetails = useSelector((state) => state.user?.user);
+    const dispatch = useDispatch();
 
     const HomamOptions = [
         { value: 'ganapathyHoma', label: t('service.ganapathy_homam') },
@@ -86,7 +88,7 @@ const BookingService = () => {
     };
 
     const handleBooking = async () => {
-        
+
         if (bookingDetails.mobile.length < 10) {
             Warring("Give valid phone number");
             return;

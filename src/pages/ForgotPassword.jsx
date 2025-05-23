@@ -10,7 +10,7 @@ import { Error, Success } from "../components/Alert";
 
 
 const ApiUrl = import.meta.env.VITE_APP_SERVER;
-const ClientUrl = import.meta.env.VITE_APP_CLIENT;
+
 
 
 const ForgotPassword = () => {

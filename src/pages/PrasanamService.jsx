@@ -211,7 +211,7 @@ const PrasanamService = () => {
                 reset();
                 handleTypeChange();
                 fetchAvailableSlots();
-                navigate("/Services",{ replace: true })
+                navigate("/Services", { replace: true })
             }
         }
         catch (error) {
@@ -324,6 +324,7 @@ const PrasanamService = () => {
                             className="inputField"
                             required
                             group="inputGroup"
+                            maxLength={6}
                             disabled
                         />
                     </div>
@@ -358,8 +359,8 @@ const PrasanamService = () => {
 
                         <div className="d-flex flex-wrap row g-3 justify-content-start">
                             {timeSlot.length > 0 ? (
-                                timeSlot.map((slot) => (
-                                    <div className="col-lg-3 col-md-4 col-sm-4 col-6">
+                                timeSlot.map((slot, index) => (
+                                    <div className="col-lg-3 col-md-4 col-sm-4 col" key={index}>
                                         <button
                                             key={`${slot.startTime}-${slot.endTime}`}
                                             type="button"

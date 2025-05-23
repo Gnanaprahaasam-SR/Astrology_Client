@@ -5,7 +5,8 @@
         "admin": "Admin",
         "services": "Services",
         "mybooking": "My Bookings",
-        "logout": "Logout"
+        "logout": "Logout",
+        "slotControl": "Slot Control"
     },
     "service": {
         "bookNow": "Book Now",
@@ -53,7 +54,10 @@
         "serviceCost": "Service Cost (Rs)",
         "analyze_horoscope": "Analyze a Horoscope",
         "write_horoscope": "Write a Horoscope",
+        "horoscope_Matching": "Horoscope Matching",
         "bookingPersonName": "Booking Person Name",
+        "horoscopeDocument": "Add Horoscope Copy",
+        "horoscopecopy":"Horoscope Copy",
         "phone": "Phone Number",
         "userId": "User ID",
         "service": "Service",
